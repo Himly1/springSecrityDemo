@@ -1,0 +1,19 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.himly.springsecuritydemo.dao.RoleDao">
+    <resultMap id="roleResult" type="com.himly.springsecuritydemo.model.Role">
+        <id column="id" property="id" />
+        <result column="role" property="role" />
+    </resultMap>
+    
+    
+    <select id="getRolesByIds"  parameterType="java.util.List" resultMap="roleResult">
+        SELECT * FROM role WHERE id IN
+        <foreach item="item" index="0" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>

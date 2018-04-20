@@ -1,0 +1,21 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.himly.springsecuritydemo.dao.StudentDao">
+    <resultMap id="studentResult" type="com.himly.springsecuritydemo.model.Student">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="country_id" property="countryId"/>
+        <result column="location" property="location"/>
+    </resultMap>
+
+
+    <select id="getStudentById" resultMap="studentResult">
+        SELECT * FROM student WHERE id = #{id}
+    </select>
+
+    <select id="getStudentByMobile" resultMap="studentResult">
+        SELECT * FROM student WHERE mobile = #{mobile}
+    </select>
+
+</mapper>

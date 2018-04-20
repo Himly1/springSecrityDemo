@@ -1,0 +1,26 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.himly.springsecuritydemo.dao.UserRoleDao">
+    <resultMap id="userRoleResult" type="com.himly.springsecuritydemo.model.UserRole">
+        <id column="id" property="id" />
+        <result column="target_type" property="targetType" />
+        <result column="target_id" property="targetId"/>
+        <result column="role_id" property="roleId"/>
+    </resultMap>
+
+
+    <select id="getUserRolesByIds" resultMap="userRoleResult">
+        SELECT * FROM user_role WHERE id = IN
+        <foreach item="item" index="0" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getUserRolesByTargetIdAndeTargetTyp" resultMap="userRoleResult">
+        SELECT * FROM user_role WHERE target_type = #{targetType} AND target_id = #{targetId}
+    </select>
+
+
+</mapper>
